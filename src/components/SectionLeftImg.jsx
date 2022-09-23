@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Section(props) {
+function SectionLeftImg(props) {
   return (
     <Wrapper bgColor={props.bgColor}>
       <ItemText>
@@ -11,7 +11,7 @@ function Section(props) {
   );
 }
 
-export default Section;
+export default SectionLeftImg;
 
 const Wrapper = styled.div`
   width: 100vw;

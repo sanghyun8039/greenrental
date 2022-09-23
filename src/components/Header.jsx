@@ -50,7 +50,6 @@ const Wrapper = styled.div`
   left: 0;
   right: 0;
   position: fixed;
-  background: white;
   min-height: 60px;
 `;
 const HeaderLeft = styled.div`
@@ -80,6 +79,7 @@ const HeaderCenter = styled.div`
       padding: 2px 0px;
       white-space: nowrap;
       position: relative;
+      color: #000000;
       &::before {
         background-color: black;
         border-radius: 0px 0px 4px 4px;
@@ -118,5 +118,8 @@ const HeaderRight = styled.div`
     font-family: "SUIT";
     font-size: 2vh;
     cursor: pointer;
+    p {
+      color: white;
+    }
   }
 `;
