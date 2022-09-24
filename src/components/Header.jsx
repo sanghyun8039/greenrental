@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   right: 0;
   position: fixed;
   min-height: 60px;
+  z-index: 1;
 `;
 const HeaderLeft = styled.div`
   margin-top: 20px;
