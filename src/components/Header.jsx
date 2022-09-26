@@ -4,6 +4,7 @@ import Logo from "../images/logo.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LoginIcon from "@mui/icons-material/Login";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 function Header() {
   const [headerBackground, setHeaderBackground] = useState(false);
 
@@ -25,11 +26,11 @@ function Header() {
         <img src={Logo} alt="" />
       </HeaderLeft>
       <HeaderCenter>
-        <a>
+        <a href="/">
           <span>서비스소개</span>
         </a>
         <span>&nbsp;&nbsp;&nbsp;</span>
-        <a>
+        <a href="/Rent">
           <span>대여</span>
         </a>
         <span>&nbsp;&nbsp;&nbsp;</span>
@@ -90,6 +91,7 @@ const HeaderCenter = styled.div`
     font-weight: bold;
     cursor: pointer;
     justify-content: space-around;
+    text-decoration: none;
     span {
       letter-spacing: 1.42px;
       line-height: 1.08;
