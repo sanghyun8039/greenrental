@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Trackter from "../images/trackter.png";
 import TrackterStorage from "../images/trackterstorage.png";
+import TimeinFarm from "../images/timeinfarm.png";
 import HeaderSection from "../components/HeaderSection";
 import SectionRightImg from "../components/SectionRightImg";
 import SectionLeftImg from "../components/SectionLeftImg";
@@ -18,7 +19,13 @@ function ServicePage() {
           "농기계 보관할 장소 필요없이, \n 농기계가 필요할 땐 그린렌탈"
         }
       />
-      <SectionRightImg bgColor="red" title="2" />
+      <SectionRightImg
+        bgImage={TimeinFarm}
+        title={"원하는 시간과 계절에,\n 빌려서 사용하세요."}
+        description={
+          "낮에는 트랙터, 가을에는 콤바인을\n 농기계가 필요할 땐 그린렌탈"
+        }
+      />
       <SectionLeftImg bgImage={TrackterStorage} title="3" />
       <SectionRightImg bgColor="yellow" title="4" />
     </Container>

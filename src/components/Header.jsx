@@ -3,9 +3,24 @@ import styled from "styled-components";
 import Logo from "../images/logo.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LoginIcon from "@mui/icons-material/Login";
+import { useEffect, useState } from "react";
 function Header() {
+  const [headerBackground, setHeaderBackground] = useState(false);
+
+  const changeBackground = () => {
+    if (window.pageYOffset >= 400) {
+      setHeaderBackground(true);
+    } else {
+      setHeaderBackground(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log(headerBackground);
+    window.addEventListener("scroll", changeBackground);
+  });
   return (
-    <Wrapper>
+    <Wrapper setBgColor={headerBackground ? "White" : "Transparent"}>
       <HeaderLeft>
         <img src={Logo} alt="" />
       </HeaderLeft>
@@ -45,6 +60,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${(props) => props.setBgColor};
   padding: 0 20px;
   top: 0;
   left: 0;
@@ -120,7 +136,7 @@ const HeaderRight = styled.div`
     font-size: 2vh;
     cursor: pointer;
     p {
-      color: white;
+      color: #000000;
     }
   }
 `;
