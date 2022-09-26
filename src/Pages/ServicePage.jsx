@@ -6,9 +6,9 @@ import TimeinFarm from "../images/timeinfarm.png";
 import HeaderSection from "../components/HeaderSection";
 import SectionRightImg from "../components/SectionRightImg";
 import SectionLeftImg from "../components/SectionLeftImg";
+import FooterSection from "../components/FooterSection";
+import Footer from "../components/Footer";
 function ServicePage() {
-  console.log(Trackter);
-  console.log(TrackterStorage);
   return (
     <Container>
       <HeaderSection bgImage={Trackter} />
@@ -26,8 +26,10 @@ function ServicePage() {
           "낮에는 트랙터, 가을에는 콤바인을\n 농기계가 필요할 땐 그린렌탈"
         }
       />
-      <SectionLeftImg bgImage={TrackterStorage} title="3" />
-      <SectionRightImg bgColor="yellow" title="4" />
+      <FooterSection />
+      <Footer />
+      {/* <SectionLeftImg bgImage={TrackterStorage} title="3" />
+      <SectionRightImg bgColor="yellow" title="4" /> */}
     </Container>
   );
 }
