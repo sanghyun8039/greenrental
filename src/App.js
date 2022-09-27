@@ -15,8 +15,6 @@ function App() {
         <AppBody>
           <Routes>
             <Route path="/" element={<ServicePage />} />
-          </Routes>
-          <Routes>
             <Route path="/Rent" element={<RentalPage />} />
           </Routes>
         </AppBody>
