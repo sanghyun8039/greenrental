@@ -7,15 +7,33 @@ import { Button, StyledEngineProvider } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { useNavigate } from "react-router-dom";
 import { ko } from "date-fns/esm/locale";
+import { useDispatch } from "react-redux";
+import { selectleftDay } from "../features/daySlice";
 function Search() {
   const [startDate, setStartDate] = useState(new Date("2022/02/08"));
   const [endDate, setEndDate] = useState(new Date("2022/02/10"));
+  const [diffDate, setDiffDate] = useState(new Date(""));
 
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+  const dispatch = useDispatch();
+
+  const diffDays = () => {
+    dispatch(
+      selectleftDay({
+        leftdays: "10",
+      })
+    );
   };
+
+  const handleSelectEndDate = () => {
+    console.log(`startDate : ${startDate} // endDate : ${endDate}`);
+    setDiffDate((endDate - startDate) / (1000 * 60 * 60 * 24));
+    diffDays();
+  };
+  // const onChange = (dates) => {
+  //   const [start, end] = dates;
+  //   setStartDate(start);
+  //   setEndDate(end);
+  // };
   return (
     <DateWrapper>
       <StartDate>
@@ -43,6 +61,7 @@ function Search() {
           startDate={startDate}
           endDate={endDate}
           minDate={startDate}
+          onCalendarClose={handleSelectEndDate}
         />{" "}
       </EndDate>
     </DateWrapper>
@@ -69,4 +88,3 @@ const EndDate = styled.div`
   padding: 5px;
   margin-left: 10px;
 `;
-const CustomDatePicker = styled(DatePicker)``;
