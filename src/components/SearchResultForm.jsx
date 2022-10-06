@@ -11,13 +11,17 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Search from "./Search";
+import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { selectRental } from "../features/rentalSlice";
 
 function SearchResultForm() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [showSearch, setShowSearch] = useState(false);
   const [device, setDevice] = useState("");
-
+  const [openModal, setOpenModal] = useState(false);
+  const [locationValue, setLocationValue] = useState("");
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
@@ -29,7 +33,9 @@ function SearchResultForm() {
     setEndDate(ranges.selection.endDate);
   }
 
-  function handleSearch() {}
+  function handleSearch() {
+    setOpenModal(true);
+  }
 
   function handleChange(event) {
     setDevice(event.target.value);
@@ -41,7 +47,10 @@ function SearchResultForm() {
           <SelectWhere>
             <h1>어디에서 빌리시나요?</h1>
             <InputContainer>
-              <CustomTextField></CustomTextField>
+              <CustomTextField
+                value={locationValue}
+                onChange={(newValue) => setLocationValue(newValue.target.value)}
+              ></CustomTextField>
 
               <SearchIcon />
             </InputContainer>
@@ -74,6 +83,13 @@ function SearchResultForm() {
           <Button onClick={() => handleSearch()}> 검색 </Button>
         </ButtonSection>
       </CustomBox>
+      {openModal && (
+        <Modal
+          closeModal={() => setOpenModal(!openModal)}
+          location={locationValue}
+          device={device}
+        />
+      )}
     </Wrapper>
   );
 }
@@ -146,6 +162,10 @@ const ButtonSection = styled.div`
     background-color: #63af5c;
     font-size: 30px;
     color: yellow;
+    span {
+      width: 100%;
+      height: 100%;
+    }
     &:hover {
       background-color: #5b5b5b;
       color: white;

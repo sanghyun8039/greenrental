@@ -34,7 +34,7 @@ function Header() {
           <span>대여</span>
         </a>
         <span>&nbsp;&nbsp;&nbsp;</span>
-        <a>
+        <a href="https://greenlabs.co.kr/">
           <span>기업소개</span>
         </a>
       </HeaderCenter>
