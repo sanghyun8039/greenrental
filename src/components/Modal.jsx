@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,9 +15,14 @@ function Modal(props) {
             <CloseIcon />
           </IconButton>
         </HeaderLayout>
+        <hr />
         <BodyLayout>
-          {props.location}
-          {props.device}
+          <Typography variant="h4">{props.location}</Typography>
+          <Typography variant="body1">에서 </Typography>
+          <Typography variant="h4">{props.device}</Typography>
+          <Typography variant="body1">를 </Typography>
+          <Typography variant="h4">{props.leftDays}</Typography>
+          <Typography variant="body1"> {"    "}일간 빌리시겠습니까?</Typography>
         </BodyLayout>
       </Container>
     </Wrapper>
@@ -62,4 +67,10 @@ const HeaderLayout = styled.div`
   margin-top: 5px;
 `;
 
-const BodyLayout = styled.div``;
+const BodyLayout = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const daySlice = createSlice({
-  name: "day",
+  name: "days",
   initialState: {
-    leftdays: "",
+    leftdays: null,
   },
   reducers: {
     setleftDay: (state, action) => {
@@ -14,5 +14,5 @@ const daySlice = createSlice({
 
 export const { setleftDay } = daySlice.actions;
 
-export const selectleftDay = (state) => state.day.leftdays;
+export const selectleftDay = (state) => state.days.leftdays;
 export default daySlice.reducer;

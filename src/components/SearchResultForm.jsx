@@ -12,8 +12,9 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Search from "./Search";
 import Modal from "./Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectRental } from "../features/rentalSlice";
+import { selectleftDay } from "../features/daySlice";
 
 function SearchResultForm() {
   const [startDate, setStartDate] = useState(new Date());
@@ -27,6 +28,7 @@ function SearchResultForm() {
     endDate: endDate,
     key: "selection",
   };
+  const leftDay = useSelector(selectleftDay);
 
   function handleSelect(ranges) {
     setStartDate(ranges.selection.startDate);
@@ -88,6 +90,7 @@ function SearchResultForm() {
           closeModal={() => setOpenModal(!openModal)}
           location={locationValue}
           device={device}
+          leftDays={leftDay}
         />
       )}
     </Wrapper>

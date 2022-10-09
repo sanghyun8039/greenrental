@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import styled from "styled-components";
 import { DateRangePicker } from "react-date-range";
 import DatePicker from "react-datepicker";
@@ -8,27 +8,28 @@ import PeopleIcon from "@mui/icons-material/People";
 import { useNavigate } from "react-router-dom";
 import { ko } from "date-fns/esm/locale";
 import { useDispatch } from "react-redux";
-import { selectleftDay } from "../features/daySlice";
+import { setleftDay } from "../features/daySlice";
 function Search() {
   const [startDate, setStartDate] = useState(new Date("2022/02/08"));
   const [endDate, setEndDate] = useState(new Date("2022/02/10"));
-  const [diffDate, setDiffDate] = useState(new Date(""));
+  const [diffDate, setDiffDate] = useState("");
 
   const dispatch = useDispatch();
 
-  const diffDays = () => {
-    dispatch(
-      selectleftDay({
-        leftdays: "10",
-      })
-    );
-  };
+  const diffDays = () => {};
 
   const handleSelectEndDate = () => {
     console.log(`startDate : ${startDate} // endDate : ${endDate}`);
-    setDiffDate((endDate - startDate) / (1000 * 60 * 60 * 24));
-    diffDays();
+    setDiffDate((endDate - startDate) / (1000 * 60 * 60 * 24) + 1);
   };
+
+  useEffect(() => {
+    dispatch(
+      setleftDay({
+        leftdays: diffDate,
+      })
+    );
+  }, [diffDate]);
   // const onChange = (dates) => {
   //   const [start, end] = dates;
   //   setStartDate(start);
