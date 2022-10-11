@@ -17,13 +17,16 @@ function Modal(props) {
         </HeaderLayout>
         <hr />
         <BodyLayout>
-          <Typography variant="h4">{props.location}</Typography>
-          <Typography variant="body1">에서 </Typography>
-          <Typography variant="h4">{props.device}</Typography>
-          <Typography variant="body1">를 </Typography>
-          <Typography variant="h4">{props.leftDays}</Typography>
-          <Typography variant="body1"> {"    "}일간 빌리시겠습니까?</Typography>
+          <CustomTypography variant="h4">{props.location}</CustomTypography>
+          <CustomTypography variant="body1">에서 </CustomTypography>
+          <CustomTypography variant="h4">{props.device}</CustomTypography>
+          <CustomTypography variant="body1">를 </CustomTypography>
+          <CustomTypography variant="h4">{props.leftDays}</CustomTypography>
+          <CustomTypography variant="body1">
+            일간 빌리시겠습니까?
+          </CustomTypography>
         </BodyLayout>
+        <CustomButton onClick={closeModal}>확인</CustomButton>
       </Container>
     </Wrapper>
   );
@@ -73,4 +76,21 @@ const BodyLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const CustomTypography = styled(Typography)`
+  padding-right: 10px;
+`;
+
+const CustomButton = styled(Button)`
+  background-color: #63af5c !important;
+  color: yellow !important;
+  span {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    background-color: #5b5b5b !important;
+    color: white !important;
+  }
 `;

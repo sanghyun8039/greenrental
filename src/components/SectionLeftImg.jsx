@@ -27,6 +27,13 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const ItemImg = styled.div`
@@ -36,8 +43,18 @@ const ItemImg = styled.div`
   margin: 10vh;
   img {
     width: 50vw;
-
     height: 80vh;
+  }
+  @media (max-width: 768px) {
+    margin: 0px;
+    width: 100%;
+    height: 50%;
+    display: block;
+    position: relative;
+    img {
+      width: 100vw;
+      height: 50vh;
+    }
   }
 `;
 
@@ -49,11 +66,14 @@ const ItemText = styled.div`
   white-space: pre-line;
   h1 {
     font-size: 7vh;
-    font-family: "SUIT";
     margin-bottom: 7vh;
   }
   p {
     font-size: 4vh;
-    font-family: "SUIT";
+  }
+  @media (max-width: 768px) {
+    margin-top: 0px;
+    width: 100%;
+    margin-bottom: 6vh;
   }
 `;

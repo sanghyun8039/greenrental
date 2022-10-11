@@ -1,46 +1,63 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import { Box, Button, StyledEngineProvider } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Search from "./Search";
 import Modal from "./Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { selectRental } from "../features/rentalSlice";
+import { useSelector } from "react-redux";
 import { selectleftDay } from "../features/daySlice";
+import FormHelperText from "@mui/material/FormHelperText";
 
 function SearchResultForm() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [showSearch, setShowSearch] = useState(false);
   const [device, setDevice] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [locationValue, setLocationValue] = useState("");
-  const selectionRange = {
-    startDate: startDate,
-    endDate: endDate,
-    key: "selection",
-  };
   const leftDay = useSelector(selectleftDay);
-
-  function handleSelect(ranges) {
-    setStartDate(ranges.selection.startDate);
-    setEndDate(ranges.selection.endDate);
-  }
+  const [locationHelperText, setLocationHelperText] = useState("");
+  const [locationErrorDisplay, setLocationErrorDisplay] = useState(false);
+  const [deviceHelperText, setDeviceHelperText] = useState("");
+  const [deviceErrorDisplay, setDeviceErrorDisplay] = useState(false);
+  const [pickerHelperText, setPickerHelperText] = useState("");
+  const [pickerErrorDisplay, setpickerErrorDisplay] = useState(false);
 
   function handleSearch() {
-    setOpenModal(true);
+    if (locationValue === "" || device === "" || leftDay === "") {
+      if (locationValue === "") {
+        setLocationHelperText("지역을 입력하세요.");
+        setLocationErrorDisplay(true);
+      }
+
+      if (device === "") {
+        setDeviceErrorDisplay(true);
+        setDeviceHelperText("장비를 선택하세요.");
+      }
+
+      if (leftDay === "") {
+        setpickerErrorDisplay(true);
+        setPickerHelperText("기간을 선택하세요.");
+      }
+      return;
+    } else {
+      setOpenModal(true);
+      return;
+    }
   }
 
   function handleChange(event) {
     setDevice(event.target.value);
+    setDeviceErrorDisplay(false);
+  }
+
+  function handlelocationChange(event) {
+    setLocationValue(event.target.value);
+    setLocationErrorDisplay(false);
   }
   return (
     <Wrapper>
@@ -50,8 +67,10 @@ function SearchResultForm() {
             <h1>어디에서 빌리시나요?</h1>
             <InputContainer>
               <CustomTextField
+                error={locationErrorDisplay ? true : false}
                 value={locationValue}
-                onChange={(newValue) => setLocationValue(newValue.target.value)}
+                onChange={handlelocationChange}
+                helperText={locationErrorDisplay ? locationHelperText : ""}
               ></CustomTextField>
 
               <SearchIcon />
@@ -60,7 +79,7 @@ function SearchResultForm() {
 
           <SelectWhat>
             <h1>무엇을 빌리시나요?</h1>
-            <FormControl fullWidth>
+            <FormControl fullWidth error={deviceErrorDisplay}>
               <InputLabel id="demo-simple-select-label">기계</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -73,18 +92,26 @@ function SearchResultForm() {
                 <MenuItem value="combine">컴바인</MenuItem>
                 <MenuItem value="test">이양기</MenuItem>
               </Select>
+              {deviceErrorDisplay && (
+                <FormHelperText>{deviceHelperText}</FormHelperText>
+              )}
             </FormControl>
           </SelectWhat>
 
           <SelectWhen>
             <h1>언제까지 빌리시나요?</h1>
-            <Search />
+            <Search
+              pickerHelperText={pickerHelperText}
+              pickerErrorDisplay={pickerErrorDisplay}
+              setPickerValue={setpickerErrorDisplay}
+            />
           </SelectWhen>
         </SelectSection>
         <ButtonSection>
           <Button onClick={() => handleSearch()}> 검색 </Button>
         </ButtonSection>
       </CustomBox>
+
       {openModal && (
         <Modal
           closeModal={() => setOpenModal(!openModal)}
@@ -107,8 +134,7 @@ const Wrapper = styled.div`
 const CustomBox = styled(Box)`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
   width: 85vw;
   height: 40vh;
   background-color: white;
@@ -120,7 +146,7 @@ const CustomBox = styled(Box)`
 const SelectWhere = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 const InputContainer = styled.div`
@@ -137,14 +163,14 @@ const CustomTextField = styled(TextField)`
 const SelectWhat = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 const SelectWhen = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -155,10 +181,10 @@ const SelectSection = styled.div`
   width: 80vw;
 `;
 const ButtonSection = styled.div`
-  width: 80vw;
-  height: 7vh;
+  width: 100%;
+  height: 8vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   Button {
     width: 100%;
     height: 100%;

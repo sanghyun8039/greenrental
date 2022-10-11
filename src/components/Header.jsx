@@ -4,7 +4,8 @@ import Logo from "../images/logo.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LoginIcon from "@mui/icons-material/Login";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+
 function Header() {
   const [headerBackground, setHeaderBackground] = useState(false);
 
@@ -51,6 +52,7 @@ function Header() {
           <p> 로그인</p>
         </a>
       </HeaderRight>
+      <CustomMenuIcon />
     </Wrapper>
   );
 }
@@ -140,5 +142,15 @@ const HeaderRight = styled.div`
     p {
       color: #000000;
     }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const CustomMenuIcon = styled(MenuIcon)`
+  @media (min-width: 768px) {
+    display: none !important;
   }
 `;
