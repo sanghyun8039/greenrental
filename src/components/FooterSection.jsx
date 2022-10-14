@@ -42,10 +42,10 @@ const Wrapper = styled.div`
   background-color: #b8edb8;
   display: flex;
   flex-direction: column;
+  position: relative;
   justify-content: space-between;
   h1 {
     font-size: 5vh;
-    font-family: "SUIT";
     text-align: center;
     margin-top: 20px;
   }

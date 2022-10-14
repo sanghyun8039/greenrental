@@ -5,8 +5,6 @@ import SearchResultForm from "../components/SearchResultForm";
 function RentalPage() {
   return (
     <Container>
-      <HeaderTag>Green Rental, Let's Go</HeaderTag>
-      <span> </span>
       <SearchResultForm />
     </Container>
   );
@@ -23,6 +21,12 @@ const Container = styled.div`
   span {
     width: 100vw;
     height: 10vh;
+  }
+  @media (max-width: 768px) {
+    span {
+      width: 100vw;
+      height: 3vh;
+    }
   }
 `;
 

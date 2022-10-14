@@ -61,6 +61,9 @@ function SearchResultForm() {
   }
   return (
     <Wrapper>
+      <HeaderTag>Green Rental, Let's Go</HeaderTag>
+      <span> </span>
+
       <CustomBox>
         <SelectSection id="SelectSection">
           <SelectWhere>
@@ -130,7 +133,15 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
+const HeaderTag = styled.h1`
+  margin-top: 80px;
+  margin-left: 7vw;
+  width: 100vw;
+  text-align: left;
+`;
+
 const CustomBox = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -141,6 +152,12 @@ const CustomBox = styled(Box)`
   border: 2px solid black;
   border-radius: 15px;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    align-items: center;
+    width: 85vw;
+    height: 75vh;
+  }
 `;
 
 const SelectWhere = styled.div`
@@ -165,6 +182,9 @@ const SelectWhat = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    max-width: fit-content;
+  }
 `;
 
 const SelectWhen = styled.div`
@@ -179,6 +199,13 @@ const SelectSection = styled.div`
   justify-content: space-between;
   margin-top: 7vh;
   width: 80vw;
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0;
+  }
 `;
 const ButtonSection = styled.div`
   width: 100%;

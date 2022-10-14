@@ -5,10 +5,11 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import LoginIcon from "@mui/icons-material/Login";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Header() {
   const [headerBackground, setHeaderBackground] = useState(false);
-
+  const [burgerStatus, setBurgerStatus] = useState(false);
   const changeBackground = () => {
     if (window.pageYOffset >= 400) {
       setHeaderBackground(true);
@@ -17,6 +18,13 @@ function Header() {
     }
   };
 
+  const handleMenu = () => {
+    setBurgerStatus(true);
+  };
+
+  const handleClose = () => {
+    setBurgerStatus(false);
+  };
   useEffect(() => {
     console.log(headerBackground);
     window.addEventListener("scroll", changeBackground);
@@ -52,7 +60,20 @@ function Header() {
           <p> 로그인</p>
         </a>
       </HeaderRight>
-      <CustomMenuIcon />
+      <CustomMenuIcon onClick={handleMenu} />
+      <BurgerNav show={burgerStatus}>
+        <CloseWapper>
+          <CutomCloseIcon onClick={handleClose} />
+        </CloseWapper>
+        <li>
+          <a href="#" />
+          문의하기
+        </li>
+        <li>
+          <a href="#" />
+          로그인
+        </li>
+      </BurgerNav>
     </Wrapper>
   );
 }
@@ -150,7 +171,38 @@ const HeaderRight = styled.div`
 `;
 
 const CustomMenuIcon = styled(MenuIcon)`
+  cursor: pointer;
   @media (min-width: 768px) {
     display: none !important;
+  }
+`;
+const CutomCloseIcon = styled(CloseIcon)`
+  cursor: pointer;
+`;
+const CloseWapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const BurgerNav = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  width: 200px;
+  z-index: 100;
+  list-style: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  transform: ${(props) => (props.show ? "translateX(0)" : "translateX(100%)")};
+  li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    a {
+      font-weight: 600;
+    }
   }
 `;

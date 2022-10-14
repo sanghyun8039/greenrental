@@ -28,9 +28,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   @media (max-width: 768px) {
+    display: flex;
     width: 100vw;
-    height: 100vh;
-
     align-items: center;
     flex-direction: column;
   }
@@ -49,8 +48,6 @@ const ItemImg = styled.div`
     margin: 0px;
     width: 100%;
     height: 50%;
-    display: block;
-    position: relative;
     img {
       width: 100vw;
       height: 50vh;

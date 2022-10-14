@@ -30,7 +30,8 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100vw;
     height: 100vh;
-
+    display: flex;
+    flex-direction: column;
     align-items: center;
     flex-direction: column-reverse;
   }
@@ -45,12 +46,10 @@ const ItemText = styled.div`
   white-space: pre-line;
   h1 {
     font-size: 7vh;
-    font-family: "SUIT";
     margin-bottom: 7vh;
   }
   p {
     font-size: 4vh;
-    font-family: "SUIT";
   }
   @media (max-width: 768px) {
     margin-top: 0px;
