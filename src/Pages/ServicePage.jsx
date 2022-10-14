@@ -28,8 +28,6 @@ function ServicePage() {
       />
       <FooterSection />
       <Footer />
-      {/* <SectionLeftImg bgImage={TrackterStorage} title="3" />
-      <SectionRightImg bgColor="yellow" title="4" /> */}
     </Container>
   );
 }
