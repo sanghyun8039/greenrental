@@ -50,8 +50,6 @@ function SearchResultForm() {
         }))
       )
     );
-
-    console.log(locations);
   }, []);
 
   function handleSearch() {
@@ -119,9 +117,12 @@ function SearchResultForm() {
                 onChange={handleChange}
                 value={device}
               >
-                <MenuItem value="tracker">트렉터</MenuItem>
+                {locations.map(({ id, data: { location } }) => (
+                  <MenuItem value="tracker">{location}</MenuItem>
+                ))}
+                {/* <MenuItem value="tracker">트렉터</MenuItem>
                 <MenuItem value="combine">컴바인</MenuItem>
-                <MenuItem value="test">이양기</MenuItem>
+                <MenuItem value="test">이양기</MenuItem> */}
               </Select>
               {deviceErrorDisplay && (
                 <FormHelperText>{deviceHelperText}</FormHelperText>
