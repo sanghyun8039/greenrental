@@ -11,10 +11,12 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Search from "./Search";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectleftDay } from "../features/daySlice";
 import FormHelperText from "@mui/material/FormHelperText";
-
+import { useEffect } from "react";
+import db from "../firebase";
+import { useParams } from "react-router-dom";
 function SearchResultForm() {
   const [device, setDevice] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -26,6 +28,31 @@ function SearchResultForm() {
   const [deviceErrorDisplay, setDeviceErrorDisplay] = useState(false);
   const [pickerHelperText, setPickerHelperText] = useState("");
   const [pickerErrorDisplay, setpickerErrorDisplay] = useState(false);
+  const [locations, setLocations] = useState([]);
+  useEffect(() => {
+    // db.collection("locations")
+    //   .doc(id)
+    //   .get()
+    //   .then((doc) => {
+    //     if (doc.exists) {
+    //       console.log(doc.data());
+    //     } else console.log("no such Document");
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error getting document : ", error);
+    //   });
+
+    db.collection("locations").onSnapshot((snapshot) =>
+      setLocations(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+
+    console.log(locations);
+  }, []);
 
   function handleSearch() {
     if (locationValue === "" || device === "" || leftDay === "") {
@@ -59,6 +86,7 @@ function SearchResultForm() {
     setLocationValue(event.target.value);
     setLocationErrorDisplay(false);
   }
+
   return (
     <Wrapper>
       <HeaderTag>Green Rental, Let's Go</HeaderTag>
